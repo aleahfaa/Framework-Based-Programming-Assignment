@@ -30,11 +30,25 @@ I created the new pages in views also adding all new pages to route (web.php), s
 ![Blog-Detail](docs-assets/week-2/blog-detail.png)
 4. Contact Page
 ![Contact](docs-assets/week-2/contact.png)
+### Week-3
+I add components architecture and Tailwind CSS to make it more maintainable and upgrade the design system. Previously, I use the inline HTML in blade files and right now in my code there are reusable Blade components (`x-card`, `x-icon`, `x-navigation`, `x-article-meta`). Below are the preview of the pages with upgraded design system that I have created.
+1. Home Page
+![Home](docs-assets/week-3/home.png)
+2. Blog Page
+![Blog](docs-assets/week-3/blog.png)
+3. Blog Detail Page
+![Blog-Detail](docs-assets/week-3/detail.png)
+4. Contact Page
+![Contact](docs-assets/week-3/contact_1.png) <br>
+![Contact-2](docs-assets/week-3/contact_2.png) <br>
 
 ## Tech Stack
 - HTML
 - PHP
 - Laravel
+- CSS
+- Tailwind CSS
+- JavaScript
 
 ## Acknowledgements
 Thanks to [Net Ninja](https://www.youtube.com/@NetNinja), I can complete this project by following the tutorial in [This Playlist](https://youtube.com/playlist?list=PL4cUxeGkcC9gF5Gez17eHcDIxrpVSBuVt&si=xobMN30LE_HB06g_)

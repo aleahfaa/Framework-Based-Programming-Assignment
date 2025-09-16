@@ -41,6 +41,12 @@ I add components architecture and Tailwind CSS to make it more maintainable and 
 4. Contact Page
 ![Contact](docs-assets/week-3/contact_1.png) <br>
 ![Contact-2](docs-assets/week-3/contact_2.png) <br>
+## Week-4
+I add database migrations, models, factories, and seeders. In migrations, I define several columns, such as id, title, description, published_at, image, and content, for articles table. In models, I make the title, description, image, and content table as fillable and I also set the date in timestamp of created_at and updated_at to be the date in published_at. In factory, I generate 10 fake data for testing. The seeder, I use to populate the database use factories. Below are the documentation:
+1. Migration
+![Migration](docs-assets/week-4/migrate.png)
+2. Seeders
+![Seeders](docs-assets/week-4/seed.png)
 
 ## Tech Stack
 - HTML
@@ -49,6 +55,7 @@ I add components architecture and Tailwind CSS to make it more maintainable and 
 - CSS
 - Tailwind CSS
 - JavaScript
+- SQLite
 
 ## Acknowledgements
 Thanks to [Net Ninja](https://www.youtube.com/@NetNinja), I can complete this project by following the tutorial in [This Playlist](https://youtube.com/playlist?list=PL4cUxeGkcC9gF5Gez17eHcDIxrpVSBuVt&si=xobMN30LE_HB06g_)

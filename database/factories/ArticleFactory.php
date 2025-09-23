@@ -24,10 +24,6 @@ class ArticleFactory extends Factory
             'content' => fake()->paragraphs(8, true),
         ];
     }
-
-    /**
-     * Create articles with random published dates (for testing purposes).
-     */
     public function withRandomPublishedDate(): static
     {
         return $this->state(fn (array $attributes) => [

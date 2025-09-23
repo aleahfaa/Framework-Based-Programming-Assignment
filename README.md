@@ -41,7 +41,7 @@ I add components architecture and Tailwind CSS to make it more maintainable and 
 4. Contact Page
 ![Contact](docs-assets/week-3/contact_1.png) <br>
 ![Contact-2](docs-assets/week-3/contact_2.png) <br>
-## Week-4
+### Week-4
 I add database migrations, models, factories, and seeders. In migrations, I define several columns, such as id, title, description, published_at, image, and content, for articles table. In models, I make the title, description, image, and content table as fillable and I also set the date in timestamp of created_at and updated_at to be the date in published_at. In factory, I generate 10 fake data for testing. The seeder, I use to populate the database use factories. I also change the route of the blog and blog detail so it will take the data from the database. Below are the documentation and the preview of the article pages with fake data in database:
 1. Migration
 ![Migration](docs-assets/week-4/migrate.png)
@@ -51,6 +51,9 @@ I add database migrations, models, factories, and seeders. In migrations, I defi
 ![Blog](docs-assets/week-4/blog.png)
 4. Blog Detail Page
 ![Blog-Detail](docs-assets/week-4/blog-detail.png)
+### Week-5
+I add controller, named routes, and pagination. Controller is to manage the flow of data between `Models` and `Views` and keep the routes clean and readable. Named routes is to makes route reference flexible, so if the URL change we only need to update the route definition. Pagination is to splits large datasets into pages. Below is the preview of the blog or article page with pagination:
+![Pagination](docs-assets/week-5/pagination.png)
 
 ## Tech Stack
 - HTML
@@ -62,4 +65,4 @@ I add database migrations, models, factories, and seeders. In migrations, I defi
 - SQLite
 
 ## Acknowledgements
-Thanks to [Net Ninja](https://www.youtube.com/@NetNinja), I can complete this project by following the tutorial in [This Playlist](https://youtube.com/playlist?list=PL4cUxeGkcC9gF5Gez17eHcDIxrpVSBuVt&si=xobMN30LE_HB06g_)
+Thanks to [Net Ninja](https://www.youtube.com/@NetNinja), I can complete this project by following the tutorial in [this playlist](https://youtube.com/playlist?list=PL4cUxeGkcC9gF5Gez17eHcDIxrpVSBuVt&si=xobMN30LE_HB06g_)

@@ -13,7 +13,6 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create 10 sample articles
         Article::factory()->count(10)->create();
     }
 }

@@ -19,25 +19,25 @@
     <div class="grid gap-6 mb-8">
         @forelse($articles as $article)
             <x-card hover="true" class="group cursor-pointer">
-                <a href="{{ url('/blog/'.$article['id']) }}" class="block">
+                <a href="{{ route('articles.show', $article) }}" class="block">
                     <div class="flex items-center space-x-4">
                         <!-- Article Image -->
                         <div class="w-16 h-16 bg-n-gray-100 rounded-md overflow-hidden flex-shrink-0">
                             <img class="w-full h-full object-cover" 
-                                 src="{{ $article['image'] ?? 'https://images.unsplash.com/photo-1585241936939-be4099591252?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}" 
-                                 alt="{{ $article['title'] }} image"
+                                 src="{{ $article->image ?? 'https://images.unsplash.com/photo-1585241936939-be4099591252?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}" 
+                                 alt="{{ $article->title }} image"
                                  loading="lazy">
                         </div>
                         <!-- article Info -->
                         <div class="flex-1 min-w-0">
                             <h2 class="text-base font-medium text-n-gray-900 mb-1 hover:text-blue-600 transition-colors duration-200">
-                                {{ $article['title'] }}
+                                {{ $article->title }}
                             </h2>
                             <p class="text-sm text-n-gray-600 line-clamp-2 leading-relaxed mb-2">
-                                {{ $article['description'] }}
+                                {{ $article->description }}
                             </p>
                             <x-article-meta 
-                                :date="$article['published_at']" 
+                                :date="$article->published_at" 
                                 :tags="['Article']"
                                 compact="true" />
                         </div>
@@ -57,6 +57,50 @@
             </x-card>
         @endforelse
     </div>
+
+    <!-- pagination -->
+    @if($articles->hasPages())
+        <div class="mb-8">
+            <x-card>
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-n-gray-600">
+                        Showing {{ $articles->firstItem() }} to {{ $articles->lastItem() }} of {{ $articles->total() }} articles
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        @if ($articles->onFirstPage())
+                            <span class="px-3 py-2 text-sm text-n-gray-400 bg-n-gray-100 rounded-md cursor-not-allowed">
+                                Previous
+                            </span>
+                        @else
+                            <a href="{{ $articles->previousPageUrl() }}" class="px-3 py-2 text-sm text-n-gray-700 bg-white border border-n-gray-300 rounded-md hover:bg-n-gray-50 transition-colors duration-200">
+                                Previous
+                            </a>
+                        @endif
+                        @foreach ($articles->getUrlRange(1, $articles->lastPage()) as $page => $url)
+                            @if ($page == $articles->currentPage())
+                                <span class="px-3 py-2 text-sm text-white bg-blue-600 rounded-md">
+                                    {{ $page }}
+                                </span>
+                            @else
+                                <a href="{{ $url }}" class="px-3 py-2 text-sm text-n-gray-700 bg-white border border-n-gray-300 rounded-md hover:bg-n-gray-50 transition-colors duration-200">
+                                    {{ $page }}
+                                </a>
+                            @endif
+                        @endforeach
+                        @if ($articles->hasMorePages())
+                            <a href="{{ $articles->nextPageUrl() }}" class="px-3 py-2 text-sm text-n-gray-700 bg-white border border-n-gray-300 rounded-md hover:bg-n-gray-50 transition-colors duration-200">
+                                Next
+                            </a>
+                        @else
+                            <span class="px-3 py-2 text-sm text-n-gray-400 bg-n-gray-100 rounded-md cursor-not-allowed">
+                                Next
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </x-card>
+        </div>
+    @endif
     <x-card>
         <div class="flex items-start space-x-4">
             <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -67,7 +111,7 @@
                 <p class="text-sm text-n-gray-600 mb-3">
                     Follow me on social media for the latest articles and updates!
                 </p>
-                <a href="{{ url('/contact') }}" class="inline-flex items-center text-sm text-blue-600 hover:text-blue-700 font-medium">
+                <a href="{{ route('contact') }}" class="inline-flex items-center text-sm text-blue-600 hover:text-blue-700 font-medium">
                     Get in touch 
                     <x-icon name="arrow-right" class="ml-1" />
                 </a>

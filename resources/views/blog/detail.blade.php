@@ -1,35 +1,35 @@
 @extends('layouts.app')
-@section('title', $title . ' - My Blog')
-@section('description', $description)
+@section('title', $article->title . ' - My Blog')
+@section('description', $article->description)
 @section('breadcrumb')
-    <a href="{{ url('/blog') }}" class="hover:text-n-gray-700 transition-colors duration-200">Blog</a>
+    <a href="{{ route('articles.index') }}" class="hover:text-n-gray-700 transition-colors duration-200">Blog</a>
     <x-icon name="chevron-right" size="w-3 h-3" />
-    <span class="text-n-gray-700">{{ $title }}</span>
+    <span class="text-n-gray-700">{{ $article->title }}</span>
 @endsection
 
 @section('content')
 <div class="max-w-4xl mx-auto animate-fade-in">
-    {{-- article image --}}
-    <x-card variant="large" :image="$image ?? 'https://images.unsplash.com/photo-1585241936939-be4099591252?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'" padding="px-8 pt-8 pb-6" class="mb-8">
-        {{-- Article Title --}}
+    {{-- image --}}
+    <x-card variant="large" :image="$article->image ?? 'https://images.unsplash.com/photo-1585241936939-be4099591252?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'" padding="px-8 pt-8 pb-6" class="mb-8">
+        {{-- title --}}
         <h1 class="text-3xl md:text-4xl font-bold text-n-gray-900 mb-4 leading-tight">
-            {{ $title }}
+            {{ $article->title }}
         </h1>
         <div class="bg-n-gray-50 rounded-md p-4 mb-6 border-l-4 border-blue-500">
-            <p class="text-n-gray-700 text-lg leading-relaxed">{{ $description }}</p>
+            <p class="text-n-gray-700 text-lg leading-relaxed">{{ $article->description }}</p>
         </div>
         <x-slot:meta>
             <x-article-meta 
                 :author="'Iffa Amalia Sabrina'" 
-                :date="$published_at" 
+                :date="$article->published_at" 
                 :tags="['Article']" />
         </x-slot:meta>
     </x-card>
-    {{-- article content --}}
+    {{-- content --}}
     <x-card padding="px-8 py-8" class="mb-8">
         <div class="prose prose-lg max-w-none">
             <div class="text-n-gray-700 text-base leading-relaxed space-y-6">
-                @foreach(explode("\n\n", $content) as $paragraph)
+                @foreach(explode("\n\n", $article->content) as $paragraph)
                     <p class="{{ $loop->first ? 'text-lg first-letter:text-4xl first-letter:font-bold first-letter:mr-1 first-letter:float-left first-letter:text-n-gray-900' : '' }}">
                         {{ $paragraph }}
                     </p>

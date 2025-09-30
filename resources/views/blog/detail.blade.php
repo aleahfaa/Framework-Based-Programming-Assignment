@@ -18,11 +18,22 @@
         <div class="bg-n-gray-50 rounded-md p-4 mb-6 border-l-4 border-blue-500">
             <p class="text-n-gray-700 text-lg leading-relaxed">{{ $article->description }}</p>
         </div>
+        @if($article->category)
+            <div class="mb-6">
+                <div class="flex items-center space-x-2">
+                    <x-icon name="tag" class="text-n-gray-500" size="w-4 h-4" />
+                    <span class="text-sm text-n-gray-600">Category:</span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        {{ $article->category->name }}
+                    </span>
+                </div>
+            </div>
+        @endif
         <x-slot:meta>
             <x-article-meta 
                 :author="'Iffa Amalia Sabrina'" 
                 :date="$article->published_at" 
-                :tags="['Article']" />
+                :tags="[$article->category ? $article->category->name : 'Uncategorized']" />
         </x-slot:meta>
     </x-card>
     {{-- content --}}
@@ -37,12 +48,26 @@
             </div>
         </div>
         <x-slot:footer>
-            <h3 class="text-sm font-medium text-n-gray-900 mb-3">Share this article</h3>
-            <div class="flex items-center space-x-3">                    
-                <button class="inline-flex items-center px-3 py-2 border border-n-gray-300 rounded-md text-sm text-n-gray-700 hover:bg-n-gray-50 transition-colors duration-200" onclick="copyArticleLink()">
-                    <x-icon name="copy" size="w-4 h-4" class="mr-2" />
-                    Copy Link
-                </button>
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-sm font-medium text-n-gray-900 mb-3">Share this article</h3>
+                    <div class="flex items-center space-x-3">                    
+                        <button class="inline-flex items-center px-3 py-2 border border-n-gray-300 rounded-md text-sm text-n-gray-700 hover:bg-n-gray-50 transition-colors duration-200" onclick="copyArticleLink()">
+                            <x-icon name="copy" size="w-4 h-4" class="mr-2" />
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <form action="{{ route('articles.destroy', $article) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this article? This action cannot be undone.')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200">
+                            <x-icon name="trash" size="w-4 h-4" class="mr-2" />
+                            Delete Article
+                        </button>
+                    </form>
+                </div>
             </div>
         </x-slot:footer>
     </x-card>

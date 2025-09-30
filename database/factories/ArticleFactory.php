@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,6 +23,7 @@ class ArticleFactory extends Factory
             // 'published_at' => fake()->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
             'image' => fake()->imageUrl(800, 600, 'articles', true),
             'content' => fake()->paragraphs(8, true),
+            'category_id' => Category::factory(),
         ];
     }
     public function withRandomPublishedDate(): static

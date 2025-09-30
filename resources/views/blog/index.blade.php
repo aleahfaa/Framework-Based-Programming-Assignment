@@ -5,11 +5,17 @@
 <div class="animate-fade-in">
     <!-- header -->
     <div class="mb-8">
-        <div class="flex items-center space-x-3 mb-4">
-            <div class="w-8 h-8 bg-n-gray-100 rounded-md flex items-center justify-center">
-                <x-icon name="book" class="text-n-gray-600" />
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-n-gray-100 rounded-md flex items-center justify-center">
+                    <x-icon name="book" class="text-n-gray-600" />
+                </div>
+                <h1 class="text-2xl font-bold text-n-gray-900">Blog Articles</h1>
             </div>
-            <h1 class="text-2xl font-bold text-n-gray-900">Blog Articles</h1>
+            <a href="{{ route('articles.create') }}" class="inline-flex items-center px-4 py-2 bg-n-gray-900 text-white rounded-md text-sm font-medium hover:bg-n-gray-800 transition-colors duration-200">
+                <x-icon name="plus" class="mr-2" size="w-4 h-4" />
+                Create Article
+            </a>
         </div>
         <p class="text-n-gray-600 text-sm">
             Discover interesting stories and insights from my writing journey
@@ -38,10 +44,17 @@
                             </p>
                             <x-article-meta 
                                 :date="$article->published_at" 
-                                :tags="['Article']"
+                                :tags="[$article->category ? $article->category->name : 'Uncategorized']"
                                 compact="true" />
                         </div>
-                        <div class="ml-4">
+                        <div class="ml-4 flex items-center space-x-2">
+                            <form action="{{ route('articles.destroy', $article) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this article? This action cannot be undone.')" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-n-gray-400 hover:text-n-gray-600 transition-colors duration-200 p-1">
+                                    <x-icon name="trash" size="w-4 h-4" />
+                                </button>
+                            </form>
                             <x-icon name="arrow-right" class="text-n-gray-400 group-hover:text-n-gray-600 transition-colors duration-200" />
                         </div>
                     </div>

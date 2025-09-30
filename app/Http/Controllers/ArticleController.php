@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +15,8 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = Article::orderBy('published_at', 'desc')
+        $articles = Article::with('category')
+                          ->orderBy('published_at', 'desc')
                           ->orderBy('created_at', 'desc')
                           ->paginate(10);
         
@@ -26,7 +28,8 @@ class ArticleController extends Controller
      */
     public function create(): View
     {
-        return view('blog.create');
+        $categories = Category::orderBy('name')->get();
+        return view('blog.create', compact('categories'));
     }
 
     /**
@@ -36,10 +39,21 @@ class ArticleController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:500',
-            'content' => 'required|string',
-            'image' => 'nullable|string|max:255',
+            'description' => 'required|string|min:10|max:500',
+            'content' => 'required|string|min:25',
+            'image' => 'required|url|max:255',
+            'category_id' => 'required|exists:categories,id',
             'published_at' => 'nullable|date',
+        ], [
+            'title.required' => 'Title must be filled',
+            'description.required' => 'Description must be filled',
+            'description.min' => 'Description must be at least 10 characters',
+            'content.required' => 'Content must be filled',
+            'content.min' => 'Content must be at least 25 characters',
+            'image.required' => 'Image URL must be filled',
+            'image.url' => 'Image URL must be a valid URL',
+            'category_id.required' => 'Choose a category',
+            'category_id.exists' => 'Selected category is invalid',
         ]);
 
         $article = Article::create($validated);
@@ -53,6 +67,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article): View
     {
+        $article->load('category');
         return view('blog.detail', compact('article'));
     }
 

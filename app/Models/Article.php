@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
@@ -20,6 +21,7 @@ class Article extends Model
         'published_at',
         'image',
         'content',
+        'category_id',
     ];
 
     /**
@@ -49,5 +51,13 @@ class Article extends Model
                 $article->published_at = now()->toDateString();
             }
         });
+    }
+
+    /**
+     * Get the category that owns the article.
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

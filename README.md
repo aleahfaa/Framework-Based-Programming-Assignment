@@ -66,6 +66,12 @@ I created category table and add category relationship to article model using fo
 ![Delete-Confirm](docs-assets/week-6/delete_confirm.png)
 5. Article Deleted Successfully
 ![Delete-Success](docs-assets/week-6/delete_success.png)
+### Week-7
+I created a new project file with authentication using Laravel Breeze. Below are the documentations:
+1. Dashboard
+![Dashboard](docs-assets/week-7/dashboard.png)
+2. Profile
+![Profile](docs-assets/week-7/profile.png)
 
 ## Tech Stack
 - HTML
@@ -77,4 +83,4 @@ I created category table and add category relationship to article model using fo
 - SQLite
 
 ## Acknowledgements
-Thanks to [Net Ninja](https://www.youtube.com/@NetNinja), I can complete this project by following the tutorial in [this playlist](https://youtube.com/playlist?list=PL4cUxeGkcC9gF5Gez17eHcDIxrpVSBuVt&si=xobMN30LE_HB06g_)
+Thanks to [Net Ninja](https://www.youtube.com/@NetNinja), I can complete this project by following the tutorial in [this playlist](https://youtube.com/playlist?list=PL4cUxeGkcC9gF5Gez17eHcDIxrpVSBuVt&si=xobMN30LE_HB06g_). Also thanks to [Yello Code](https://www.youtube.com/@yelocode), I can add authentication in my new project file by following the tutorial in [this video](https://youtu.be/3aZAE3Mw5y4?si=feOsqILXzaGzA4M_). I will implement it in my blog project later.
